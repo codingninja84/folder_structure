@@ -2,6 +2,10 @@
 
 ### You can clone this Repo in you Coding Dojo folder you set up during Web Fundamentals.
 
-/coding_dojo (navigate you terminal/command line to this directory.)
+/coding_dojo
+
   /web_fundamentals
-  /dojo_python (this folder will be cloned from this Repo.)
+
+  /dojo_python
+
+    * git clone the repo here *
