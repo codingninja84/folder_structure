@@ -4,8 +4,8 @@
 
 /coding_dojo
 
-  /web_fundamentals
+    /web_fundamentals
 
-  /dojo_python
+    /dojo_python
 
-    * git clone the repo here *
+      * git clone the repo here *
