@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>results</title>
+  </head>
+  <body>
+    <h1>User:</h1>
+    <h4>----------------------</h4>
+    {% with messages = get_flashed_messages()%}
+      {%if messages%}
+        {%for message in messages%}
+         <h2>Success! Hello : {{message}}</h2>
+       {%endfor%}
+      {%endif%}
+    {%endwith%}
+    <h3>Favorite Location: {{session['location']}}</h3>
+    <h3>Favorite Language: {{session['lang']}}</h3>
+    <h3>Comment: {{session['location']}}</h3>
+  </body>
+</html>
