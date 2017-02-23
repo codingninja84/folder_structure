@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    {%load humanize%}
+  </head>
+  <body>
+    {% for value in message %}
+      {%if value.liked_by.count > 0 %}
+      <p>{{value.message}} - Posted by: {{value.creator.first_name}} - Posted at: {{value.created_at|naturaltime}} - (Likes - {{value.liked_by.count}}) - <a href="/likes/{{value.id}}">Like</a></p>
+      {%endif%}
+    {% endfor %}
+  </body>
+</html>
