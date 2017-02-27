@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello!</title>
+  </head>
+  <body>
+    <h1>Welcome</h1>
+    <h1>{{request.session.name}}</h1>
+    <h3>Here is your wishlist</h3>
+    <table>
+      <thead>
+        <th>Item</th>
+        <th>Added By</th>
+        <th>Date Added</th>
+        <th>Action</th>
+      </thead>
+      {% for value in current.wishes.all %}
+      <tbody>
+          <td>{{value.wish_name}}</td>
+          <td>{{value.first_name}}</td>
+          <td>{{value.created_at}}</td>
+          {%if value.id != request.session.id%}
+            <td><a href="{% url 'wishlist:remove' value.id %}">Remove From My List</a></td>
+          {%else%}
+            <td><a href="{% url 'wishlist:delete' value.id %}">Delete MY CREATED item</a></td>
+          {%endif%}
+      </tbody>
+      {% endfor %}
+    </table>
+
+    <h3>Other Wishlist</h3>
+
+    <table>
+      <thead>
+        <th>Item</th>
+        <th>Added By</th>
+        <th>Date Added</th>
+        <th>Action</th>
+        {% for wish in wishes %}
+        {% for value in wish.wisher.all %}
+          <tbody>
+            <td><p>{{wish.wish_name}}</p></td>
+            <td><p>{{value.first_name}}</p><td>
+            <td><p>{{wish.created_at}}</p></td>
+            {%if value.id == request.session.id%}
+              <td><a href="{% url 'wishlist:delete' wish.id %}">Delete</a></td>
+              <td><td><a href="{% url 'wishlist:addto' wish.id %}">Add to MY list</a></td></td>
+            {%else%}
+              <td><td><a href="{% url 'wishlist:addto' wish.id %}">Add to MY list</a></td></td>
+            {%endif%}
+          </tbody>
+          {% endfor %}
+        {% endfor %}
+      </thead>
+    </table>
+    <a href="{% url 'wishlist:create'%}">Add Item</a>
+  </body>
+</html>
