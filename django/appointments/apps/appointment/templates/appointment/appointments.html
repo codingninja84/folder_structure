@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello</title>
+  </head>
+  <body>
+    <a href="{% url 'users:logout'%}">Logout</a>
+    <h1>Hello, {{request.session.name}}</h1>
+    <h3>Here are your appointments for today - {{now}}.</h3>
+    <table>
+      <thead>
+        <th>Tasks</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th>action</th>
+      </thead>
+    {% for value in today %}
+      <tbody>
+          <td>{{value.tasks}}</td>
+          <td>{{value.time}}</td>
+          <td>{{value.status}}</td>
+          {%if value.status == "pending"%}
+            <td><a href="{% url 'users:editPage' value.id %}">Edit</a> | <a href="{% url 'users:delete' value.id %}">Delete</a></td>
+          {%else%}
+            <td><a href="{% url 'users:editPage' value.id %}">Edit</a></td>
+          {%endif%}
+      </tbody>
+    {% endfor %}
+    </table>
+    <h3>Add Appointment</h3>
+    {%if messages%}
+      {% for message in messages %}
+        <p>{{message}}</p>
+      {% endfor %}
+    {%endif%}
+    <form class="" action="{% url 'users:createNew' %}" method="post">
+      {% csrf_token %}
+      <label for="date">Date</label>
+      <input type="date" name="date" value="">
+      <label for="time">Time</label>
+      <input type="time" name="time" value="">
+      <label for="tasks">Task</label>
+      <input type="text" name="tasks" value="">
+      <input type="submit" name="submit" value="Add">
+    </form>
+    {{current.dob.date}}
+    <table>
+      <thead>
+        <th>Tasks</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th>action</th>
+      </thead>
+    {% for value in appt %}
+      <tbody>
+          <td>{{value.tasks}}</td>
+          <td>{{value.date}}</td>
+          <td>{{value.status}}</td>
+          {%if value.status == "pending"%}
+            <td><a href="{% url 'users:editPage' value.id %}">Edit</a> | <a href="{% url 'users:delete' value.id %}">Delete</a></td>
+          {%else%}
+            <td><a href="{% url 'users:editPage' value.id %}">Edit</a></td>
+          {%endif%}
+      </tbody>
+    {% endfor %}
+    </table>
+  </body>
+</html>

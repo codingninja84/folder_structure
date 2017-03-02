@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit</title>
+    <style media="screen">
+      td, th{
+        border : 2px solid #333;
+        padding : 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="{% url 'users:success'%}">Dashboard</a> | <a href="{% url 'users:logout'%}">Logout</a>
+    <h3>You are currently editing: "{{apt.tasks}}"</h1>
+    <table>
+      <thead>
+        <th>Current Task</th>
+        <th>Current Status</th>
+        <th>Change Status</th>
+      </thead>
+      <tbody>
+        <td>{{apt.tasks}}</td>
+        <td>{{apt.status}}</td>
+        <td>  <form class="" action="{% url 'users:edit' apt.id %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="tasks" value="{{apt.tasks}}">
+                <select class="" name="select">
+                  <option value="pending">Pending</option>
+                  <option value="done">Done</option>
+                  <option value="missed">missed</option>
+                </select>
+                <input type="date" name="date" value={{apt.date}}>
+                <input type="time" name="time" value={{apt.time}}>
+
+                <input type="submit" name="" value="Update">
+            </form>
+        </td>
+      </tbody>
+    </table>
+  </body>
+</html>
